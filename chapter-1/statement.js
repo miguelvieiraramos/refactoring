@@ -1,4 +1,4 @@
-function renderPlainText (invoice, plays) {
+function renderPlainText (data, invoice, plays) {
     function amountFor(aPerformance) {
         let result = 0;
         switch (playFor(aPerformance).type) {
@@ -69,7 +69,9 @@ function renderPlainText (invoice, plays) {
 }
 
 function statement(invoice, plays) {
-    return renderPlainText(invoice, plays);
+    const statementData = {};
+    statementData.customer = invoice.customer;
+    return renderPlainText(statementData, invoice, plays);
 }
 
 module.exports = statement
