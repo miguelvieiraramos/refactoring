@@ -26,3 +26,5 @@ function statement(invoice, plays) {
 }
 
 module.exports = statement
+
+// parei na 31, preciso fazer a parte do html + mover usd para fora da renderPlainText
