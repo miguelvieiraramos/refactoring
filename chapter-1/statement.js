@@ -1,5 +1,4 @@
-// pag. 18, mas eu ja fiz a parte de splitar o loop e mover o calculo de créditos para uma outra função
-function statement (invoice, plays) {
+function renderPlainText (invoice, plays) {
     function amountFor(aPerformance) {
         let result = 0;
         switch (playFor(aPerformance).type) {
@@ -61,15 +60,16 @@ function statement (invoice, plays) {
     }
 
     let result = `Statement for ${invoice.customer}\n`;
-    for (let perf of invoice.performances) {
-        
-        // print line for this order
+    for (let perf of invoice.performances) {   
         result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
     }
-    
     result += `Amount owed is ${usd(totalAmount())}\n`;
     result += `You earned ${totalVolumeCredits()} credits\n`;
     return result;
+}
+
+function statement(invoice, plays) {
+    return renderPlainText(invoice, plays);
 }
 
 module.exports = statement
