@@ -1,3 +1,4 @@
+// pag. 18, mas eu ja fiz a parte de splitar o loop e mover o calculo de créditos para uma outra função
 function statement (invoice, plays) {
     function amountFor(aPerformance) {
         let result = 0;
@@ -60,9 +61,8 @@ function statement (invoice, plays) {
         totalAmount += amountFor(perf);
     }
 
-    let volumeCredits = totalVolumeCredits();
     result += `Amount owed is ${usd(totalAmount)}\n`;
-    result += `You earned ${volumeCredits} credits\n`;
+    result += `You earned ${totalVolumeCredits()} credits\n`;
     return result;
 }
 
