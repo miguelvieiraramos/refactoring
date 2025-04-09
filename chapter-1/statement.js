@@ -1,11 +1,4 @@
 function renderPlainText (data) {
-    function volumeCreditsFor(aPerformance) {
-        let result = 0;
-        result += Math.max(aPerformance.audience - 30, 0);
-        if ("comedy" === aPerformance.play.type) result += Math.floor(aPerformance.audience / 5);
-        return result;
-    }
-
     function usd(aNumber) {
         return new Intl.NumberFormat(
             "en-US",
@@ -20,7 +13,7 @@ function renderPlainText (data) {
     function totalVolumeCredits() {
         let volumeCredits = 0;
         for (let perf of data.performances) {
-            volumeCredits += volumeCreditsFor(perf);
+            volumeCredits += perf.volumeCredits;
         }
         return volumeCredits
     }
@@ -51,6 +44,7 @@ function statement(invoice, plays) {
         const result = Object.assign({}, aPerformance);
         result.play = playFor(aPerformance);
         result.amount = amountFor(result)
+        result.volumeCredits = volumeCreditsFor(result)
         return result;
     }
 
@@ -77,6 +71,13 @@ function statement(invoice, plays) {
         default:
             throw new Error(`unknown type: ${aPerformance.play.type}`);
         }
+        return result;
+    }
+
+    function volumeCreditsFor(aPerformance) {
+        let result = 0;
+        result += Math.max(aPerformance.audience - 30, 0);
+        if ("comedy" === aPerformance.play.type) result += Math.floor(aPerformance.audience / 5);
         return result;
     }
     return renderPlainText(statementData, plays);
