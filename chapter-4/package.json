@@ -1,0 +1,12 @@
+{
+  "name": "chapter-4",
+  "version": "1.0.0",
+  "main": "producer.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
